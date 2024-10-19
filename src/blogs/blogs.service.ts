@@ -20,15 +20,29 @@ export class BlogsService {
     }
 
     async findAll(): Promise<Blog[]> {
-        return this.blogModel.findAll({ include: ['user', 'posts'] });
+        const blogs = await this.blogModel.findAll({ include: ['user', 'posts'] });
+        const newBlogs = blogs.map((blog) => {
+            const newBlog = blog.toJSON();
+            if (newBlog.user) {
+                delete newBlog.user.password;
+            }
+            return newBlog;
+        });
+        return newBlogs;
     }
 
     async findOne(id: number): Promise<Blog> {
-        const blog = this.blogModel.findByPk(id, { include: ['user', 'posts'] });
+        const blog = await this.blogModel.findByPk(id, { include: ['user', 'posts'] });
+        
         if (!blog) {
             throw new NotFoundException('Blog not found');
         }
-        return blog;
+
+        // exclude user password from the response
+        const newBlog = blog.toJSON();        
+        delete newBlog.user.password;
+
+        return newBlog;
     }
 
     async update(id: number, updateBlogDto: UpdateBlogDto): Promise<Blog> {

@@ -54,3 +54,9 @@ Content-Type: application/json
     "title": "Blog 2",
     "description": "Conteúdo do blog 2"
 }
+
+### GET ALL BLOGS
+GET http://localhost:3000/blogs
+
+### GET BLOG BY ID
+GET http://localhost:3000/blogs/5
