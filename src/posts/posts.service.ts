@@ -18,6 +18,9 @@ export class PostsService {
         if (!blog) {
             throw new NotFoundException('Blog not found');
         }
+        if (blog.userId !== createPostDto.userId) {
+            throw new NotFoundException('You are not authorized to create a post for this blog');
+        }
         const post = new Post();
         post.title = createPostDto.title;
         post.content = createPostDto.content;

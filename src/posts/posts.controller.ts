@@ -12,8 +12,14 @@ export class PostsController {
     constructor(private readonly postsService: PostsService) {}
 
     @UseGuards(JwtAuthGuard)
-    @Post()
-    async create(@Body() createPostDto: CreatePostDto): Promise<PostModel> {
+    @Post(':id')
+    async create(
+        @Param('id') blogId: number,
+        @Body() createPostDto: CreatePostDto,
+        @Request() req
+    ): Promise<PostModel> {
+        createPostDto.userId = req.user.id;
+        createPostDto.blogId = blogId;
         return this.postsService.create(createPostDto);
     }
 

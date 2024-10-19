@@ -59,7 +59,7 @@ Content-Type: application/json
 GET http://localhost:3000/blogs
 
 ### GET BLOG BY ID
-GET http://localhost:3000/blogs/5
+GET http://localhost:3000/blogs/6
 
 ### UPDATE BLOG
 PUT http://localhost:3000/blogs/5
@@ -75,3 +75,13 @@ Content-Type: application/json
 DELETE http://localhost:3000/blogs/5
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlZHJvQGdtYWlsLmNvbSIsInN1YiI6NiwiaWF0IjoxNzI5MzQ5MDIxLCJleHAiOjE3Mjk0MzU0MjF9.o3fEamKboH2wsTOtBbnOsx_n4y1GVCFuDDQ-NrjXeDE
 
+# PostsController
+### CREATE POST
+POST http://localhost:3000/posts/6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlZHJvQGdtYWlsLmNvbSIsInN1YiI6NiwiaWF0IjoxNzI5MzQ5MDIxLCJleHAiOjE3Mjk0MzU0MjF9.o3fEamKboH2wsTOtBbnOsx_n4y1GVCFuDDQ-NrjXeDE
+Content-Type: application/json
+
+{
+    "title": "Post 2",
+    "content": "Conteúdo do post 2"
+}
