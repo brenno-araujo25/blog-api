@@ -1,0 +1,56 @@
+# AuthController
+### CREATE USER
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "name": "Pedro Silva",
+    "email": "pedro@gmail.com",
+    "password": "pedro"
+}
+
+### LOGIN
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "pedro@gmail.com",
+    "password": "pedro"
+}
+
+
+# UsersController
+### GET PROFILE
+GET http://localhost:3000/users/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlZHJvQGdtYWlsLmNvbSIsInN1YiI6NiwiaWF0IjoxNzI5MzQ5MDIxLCJleHAiOjE3Mjk0MzU0MjF9.o3fEamKboH2wsTOtBbnOsx_n4y1GVCFuDDQ-NrjXeDE
+
+### UPDATE PROFILE (lembrar de alterar pra não precisar do id)
+PUT http://localhost:3000/users/6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlZHJvQGdtYWlsLmNvbSIsInN1YiI6NiwiaWF0IjoxNzI5MzQ5MDIxLCJleHAiOjE3Mjk0MzU0MjF9.o3fEamKboH2wsTOtBbnOsx_n4y1GVCFuDDQ-NrjXeDE
+Content-Type: application/json
+
+{
+    "name": "Pedro Araújo",
+    "bio": "Desenvolvedor Full Stack"
+}
+
+### DELETE PROFILE
+DELETE http://localhost:3000/users/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlZHJvQGdtYWlsLmNvbSIsInN1YiI6NCwiaWF0IjoxNzI5MzQ4NjQ5LCJleHAiOjE3Mjk0MzUwNDl9.-t8RUlLGMW3ph85WmqvtuvhU2M_wc3KdrpzxGYjrviQ
+
+### GET ALL USERS
+GET http://localhost:3000/users
+
+### GET USER BY ID
+GET http://localhost:3000/users/6
+
+# BlogsController
+### CREATE BLOG
+POST http://localhost:3000/blogs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlZHJvQGdtYWlsLmNvbSIsInN1YiI6NiwiaWF0IjoxNzI5MzQ5MDIxLCJleHAiOjE3Mjk0MzU0MjF9.o3fEamKboH2wsTOtBbnOsx_n4y1GVCFuDDQ-NrjXeDE
+Content-Type: application/json
+
+{
+    "title": "Blog 2",
+    "description": "Conteúdo do blog 2"
+}
