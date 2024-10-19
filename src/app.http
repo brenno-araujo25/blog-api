@@ -85,3 +85,23 @@ Content-Type: application/json
     "title": "Post 2",
     "content": "Conteúdo do post 2"
 }
+
+### GET ALL POSTS
+GET http://localhost:3000/posts
+
+### GET POST BY ID
+GET http://localhost:3000/posts/3
+
+### UPDATE POST
+PUT http://localhost:3000/posts/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlZHJvQGdtYWlsLmNvbSIsInN1YiI6NiwiaWF0IjoxNzI5MzQ5MDIxLCJleHAiOjE3Mjk0MzU0MjF9.o3fEamKboH2wsTOtBbnOsx_n4y1GVCFuDDQ-NrjXeDE
+Content-Type: application/json
+
+{
+    "title": "Novo título",
+    "content": "Conteúdo atualizado"
+}
+
+### DELETE POST
+DELETE http://localhost:3000/posts/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlZHJvQGdtYWlsLmNvbSIsInN1YiI6NiwiaWF0IjoxNzI5MzQ5MDIxLCJleHAiOjE3Mjk0MzU0MjF9.o3fEamKboH2wsTOtBbnOsx_n4y1GVCFuDDQ-NrjXeDE

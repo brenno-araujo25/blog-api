@@ -50,4 +50,20 @@ export class PostsController {
         }
         return this.postsService.update(id, updatePostDto);
     }
+
+    @UseGuards(JwtAuthGuard)
+    @Delete(':id')
+    async remove(
+        @Param('id') id: number,
+        @Request() req,
+    ): Promise<void> {
+        const post = await this.postsService.findOne(id);
+        if (!post) {
+            throw new NotFoundException('Post not found');
+        }
+        if (post.userId !== req.user.id) {
+            throw new UnauthorizedException('You are not authorized to delete this post');
+        }
+        return this.postsService.remove(id);
+    };
 }
