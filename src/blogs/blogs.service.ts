@@ -39,8 +39,9 @@ export class BlogsService {
         }
 
         // exclude user password from the response
-        const newBlog = blog.toJSON();        
-        delete newBlog.user.password;
+        const newBlog = blog.toJSON();       
+        if (newBlog.user) 
+            delete newBlog.user.password;
 
         return newBlog;
     }
@@ -54,7 +55,7 @@ export class BlogsService {
     }
 
     async remove(id: number): Promise<void> {
-        const blog = await this.findOne(id);
+        const blog = await this.blogModel.findByPk(id);
         if (!blog) {
             throw new NotFoundException('Blog not found');
         }
