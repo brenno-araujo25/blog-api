@@ -46,7 +46,7 @@ export class BlogsService {
     }
 
     async update(id: number, updateBlogDto: UpdateBlogDto): Promise<Blog> {
-        const blog = await this.findOne(id);
+        const blog = await this.blogModel.findByPk(id);
         if (!blog) {
             throw new NotFoundException('Blog not found');
         }
