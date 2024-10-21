@@ -78,7 +78,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlZHJvQ
 # PostsController
 ### CREATE POST
 POST http://localhost:3000/posts/6
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlZHJvQGdtYWlsLmNvbSIsInN1YiI6NiwiaWF0IjoxNzI5MzQ5MDIxLCJleHAiOjE3Mjk0MzU0MjF9.o3fEamKboH2wsTOtBbnOsx_n4y1GVCFuDDQ-NrjXeDE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlZHJvQGdtYWlsLmNvbSIsInN1YiI6NiwiaWF0IjoxNzI5NDYzNzA5LCJleHAiOjE3Mjk1NTAxMDl9.u0OsvTLimZAFAaWL03BagbDDrG2uvKU8ebMIqEWtI_A
 Content-Type: application/json
 
 {
@@ -90,7 +90,7 @@ Content-Type: application/json
 GET http://localhost:3000/posts
 
 ### GET POST BY ID
-GET http://localhost:3000/posts/3
+GET http://localhost:3000/posts/4
 
 ### UPDATE POST
 PUT http://localhost:3000/posts/3
@@ -105,3 +105,65 @@ Content-Type: application/json
 ### DELETE POST
 DELETE http://localhost:3000/posts/3
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlZHJvQGdtYWlsLmNvbSIsInN1YiI6NiwiaWF0IjoxNzI5MzQ5MDIxLCJleHAiOjE3Mjk0MzU0MjF9.o3fEamKboH2wsTOtBbnOsx_n4y1GVCFuDDQ-NrjXeDE
+
+# LikesController
+### TOGGLE LIKE
+POST http://localhost:3000/likes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlZHJvQGdtYWlsLmNvbSIsInN1YiI6NiwiaWF0IjoxNzI5NDYzNzA5LCJleHAiOjE3Mjk1NTAxMDl9.u0OsvTLimZAFAaWL03BagbDDrG2uvKU8ebMIqEWtI_A
+Content-Type: application/json
+
+{
+    "postId": 4
+}
+
+### GET COUNT LIKES
+GET http://localhost:3000/likes/count/4
+
+# CommentsController
+### CREATE COMMENT
+POST http://localhost:3000/comments
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlZHJvQGdtYWlsLmNvbSIsInN1YiI6NiwiaWF0IjoxNzI5NTMwNDcwLCJleHAiOjE3Mjk2MTY4NzB9.z-E4wlonAhrzyWR_HZDIZq6abpJgx2Lm5YR6CEvUe6g
+Content-Type: application/json
+
+{
+    "postId": 4,
+    "content": "Comentário teste"
+}
+
+### GET ALL COMMENTS
+GET http://localhost:3000/comments
+
+### GET COMMENT BY ID
+GET http://localhost:3000/comments/1
+
+### UPDATE COMMENT
+PUT http://localhost:3000/comments/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlZHJvQGdtYWlsLmNvbSIsInN1YiI6NiwiaWF0IjoxNzI5NTMwNDcwLCJleHAiOjE3Mjk2MTY4NzB9.z-E4wlonAhrzyWR_HZDIZq6abpJgx2Lm5YR6CEvUe6g
+Content-Type: application/json
+
+{
+    "content": "Comentário atualizado"
+}
+
+### DELETE COMMENT
+DELETE http://localhost:3000/comments/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlZHJvQGdtYWlsLmNvbSIsInN1YiI6NiwiaWF0IjoxNzI5NTMwNDcwLCJleHAiOjE3Mjk2MTY4NzB9.z-E4wlonAhrzyWR_HZDIZq6abpJgx2Lm5YR6CEvUe6g
+
+# FollowsController
+### TOGGLE FOLLOW
+POST http://localhost:3000/follows
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlZHJvQGdtYWlsLmNvbSIsInN1YiI6NiwiaWF0IjoxNzI5NTMwNDcwLCJleHAiOjE3Mjk2MTY4NzB9.z-E4wlonAhrzyWR_HZDIZq6abpJgx2Lm5YR6CEvUe6g
+Content-Type: application/json
+
+{
+    "followingId": 1
+}
+
+### GET FOLLOWERS
+GET http://localhost:3000/follows/followers/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlZHJvQGdtYWlsLmNvbSIsInN1YiI6NiwiaWF0IjoxNzI5NTMwNDcwLCJleHAiOjE3Mjk2MTY4NzB9.z-E4wlonAhrzyWR_HZDIZq6abpJgx2Lm5YR6CEvUe6g
+
+### GET FOLLOWING
+GET http://localhost:3000/follows/following/6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlZHJvQGdtYWlsLmNvbSIsInN1YiI6NiwiaWF0IjoxNzI5NTMwNDcwLCJleHAiOjE3Mjk2MTY4NzB9.z-E4wlonAhrzyWR_HZDIZq6abpJgx2Lm5YR6CEvUe6g
+

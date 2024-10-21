@@ -37,7 +37,12 @@ export class FollowsService {
             where: { followingId: userId },
             include: ['follower'],
         });
-        return followers;
+        const followersWithoutPassword = followers.map(follow => {
+            const followJson = follow.toJSON();
+            delete followJson.follower.password;
+            return followJson;
+        });
+        return followersWithoutPassword;
     }
 
     async findFollowing(userId: number): Promise<Follow[]> {
@@ -45,6 +50,11 @@ export class FollowsService {
             where: { followerId: userId },
             include: ['following'],
         });
-        return following;
+        const followingWithoutPassword = following.map(follow => {
+            const followingJson = follow.toJSON();
+            delete followingJson.following.password;
+            return followingJson;
+        });
+        return followingWithoutPassword;
     }
 }
