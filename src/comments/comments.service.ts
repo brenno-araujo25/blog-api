@@ -1,16 +1,16 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
-import { InjectModel } from "@nestjs/sequelize";
-import { Comment } from "./comment.model";
-import { CreateCommentDto } from "./dto/create-comment.dto";
-import { UpdateCommentDto } from "./dto/update-comment.dto";
-import { PostsService } from "../posts/posts.service";
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
+import { Comment } from './comment.model';
+import { CreateCommentDto } from './dto/create-comment.dto';
+import { UpdateCommentDto } from './dto/update-comment.dto';
+import { PostsService } from '../posts/posts.service';
 
 @Injectable()
 export class CommentsService {
     constructor(
         @InjectModel(Comment)
         private commentModel: typeof Comment,
-        private postsService: PostsService
+        private postsService: PostsService,
     ) {}
 
     async create(createCommentDto: CreateCommentDto): Promise<Comment> {
@@ -30,14 +30,19 @@ export class CommentsService {
     }
 
     async findOne(id: number): Promise<Comment> {
-        const comment = await this.commentModel.findByPk(id, { include: ['post', 'user'] });
+        const comment = await this.commentModel.findByPk(id, {
+            include: ['post', 'user'],
+        });
         if (!comment) {
             throw new NotFoundException('Comment not found');
         }
         return comment;
     }
 
-    async update(id: number, updateCommentDto: UpdateCommentDto): Promise<Comment> {
+    async update(
+        id: number,
+        updateCommentDto: UpdateCommentDto,
+    ): Promise<Comment> {
         const comment = await this.findOne(id);
         if (!comment) {
             throw new NotFoundException('Comment not found');

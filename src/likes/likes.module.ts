@@ -7,11 +7,7 @@ import { PostsModule } from '../posts/posts.module';
 import { UsersModule } from '../users/users.module';
 
 @Module({
-    imports: [
-        SequelizeModule.forFeature([Like]),
-        PostsModule,
-        UsersModule
-    ],
+    imports: [SequelizeModule.forFeature([Like]), PostsModule, UsersModule],
     providers: [LikesService],
     controllers: [LikesController],
     exports: [LikesService],

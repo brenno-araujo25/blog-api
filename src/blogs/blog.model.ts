@@ -1,6 +1,14 @@
-import { Table, Column, Model, DataType, ForeignKey, BelongsTo, HasMany } from "sequelize-typescript";
-import { User } from "../users/user.model";
-import { Post } from "../posts/post.model";
+import {
+    Table,
+    Column,
+    Model,
+    DataType,
+    ForeignKey,
+    BelongsTo,
+    HasMany,
+} from 'sequelize-typescript';
+import { User } from '../users/user.model';
+import { Post } from '../posts/post.model';
 
 @Table
 export class Blog extends Model<Blog> {

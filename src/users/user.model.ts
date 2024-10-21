@@ -1,4 +1,12 @@
-import { Table, Column, Model, DataType, Unique, AllowNull, HasMany } from 'sequelize-typescript';
+import {
+    Table,
+    Column,
+    Model,
+    DataType,
+    Unique,
+    AllowNull,
+    HasMany,
+} from 'sequelize-typescript';
 import { Post } from '../posts/post.model';
 
 @Table
@@ -20,7 +28,7 @@ export class User extends Model<User> {
 
     @Column(DataType.STRING)
     avatar: string;
-    
+
     // Define the relationship between the User and Post models
     @HasMany(() => Post)
     posts: Post[];

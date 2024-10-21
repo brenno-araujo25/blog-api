@@ -1,4 +1,12 @@
-import { Controller, Post, Body, UseGuards, Request, Get, Param } from '@nestjs/common';
+import {
+    Controller,
+    Post,
+    Body,
+    UseGuards,
+    Request,
+    Get,
+    Param,
+} from '@nestjs/common';
 import { LikesService } from './likes.service';
 import { CreateLikeDto } from './dto/create-like.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -9,7 +17,7 @@ export class LikesController {
 
     @UseGuards(JwtAuthGuard)
     @Post()
-    async toggleLike(@Body() createLikeDto: CreateLikeDto, @Request() req) { 
+    async toggleLike(@Body() createLikeDto: CreateLikeDto, @Request() req) {
         createLikeDto.userId = req.user.id;
         const like = await this.likesService.toggleLike(createLikeDto);
         if (like) {

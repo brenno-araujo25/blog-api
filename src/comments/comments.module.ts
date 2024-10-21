@@ -7,11 +7,7 @@ import { PostsModule } from '../posts/posts.module';
 import { UsersModule } from '../users/users.module';
 
 @Module({
-    imports: [
-        SequelizeModule.forFeature([Comment]),
-        PostsModule,
-        UsersModule
-    ],
+    imports: [SequelizeModule.forFeature([Comment]), PostsModule, UsersModule],
     providers: [CommentsService],
     controllers: [CommentsController],
     exports: [CommentsService],

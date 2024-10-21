@@ -1,17 +1,17 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
-import { InjectModel } from "@nestjs/sequelize";
-import { User } from "./user.model";
-import { CreateUserDto } from "./dto/create-user.dto";
-import { UpdateUserDto } from "./dto/update-user.dto";
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
+import { User } from './user.model';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
-export class UsersService{
+export class UsersService {
     static findOne(followingId: number) {
-        throw new Error("Method not implemented.");
+        throw new Error('Method not implemented.');
     }
     constructor(
         @InjectModel(User)
-        private userModel: typeof User
+        private userModel: typeof User,
     ) {}
 
     async create(createUserDto: CreateUserDto): Promise<User> {

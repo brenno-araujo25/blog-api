@@ -1,4 +1,16 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards, Request, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import {
+    Controller,
+    Get,
+    Post,
+    Put,
+    Delete,
+    Body,
+    Param,
+    UseGuards,
+    Request,
+    NotFoundException,
+    UnauthorizedException,
+} from '@nestjs/common';
 import { UseInterceptors } from '@nestjs/common';
 import { CacheInterceptor } from '@nestjs/cache-manager';
 import { PostsService } from './posts.service';
@@ -16,7 +28,7 @@ export class PostsController {
     async create(
         @Param('id') blogId: number,
         @Body() createPostDto: CreatePostDto,
-        @Request() req
+        @Request() req,
     ): Promise<PostModel> {
         createPostDto.userId = req.user.id;
         createPostDto.blogId = blogId;
@@ -46,24 +58,25 @@ export class PostsController {
             throw new NotFoundException('Post not found');
         }
         if (post.userId !== req.user.id) {
-            throw new UnauthorizedException('You are not authorized to update this post');
+            throw new UnauthorizedException(
+                'You are not authorized to update this post',
+            );
         }
         return this.postsService.update(id, updatePostDto);
     }
 
     @UseGuards(JwtAuthGuard)
     @Delete(':id')
-    async remove(
-        @Param('id') id: number,
-        @Request() req,
-    ): Promise<void> {
+    async remove(@Param('id') id: number, @Request() req): Promise<void> {
         const post = await this.postsService.findOne(id);
         if (!post) {
             throw new NotFoundException('Post not found');
         }
         if (post.userId !== req.user.id) {
-            throw new UnauthorizedException('You are not authorized to delete this post');
+            throw new UnauthorizedException(
+                'You are not authorized to delete this post',
+            );
         }
         return this.postsService.remove(id);
-    };
+    }
 }

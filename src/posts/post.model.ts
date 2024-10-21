@@ -1,4 +1,12 @@
-import { Table, Column, Model, DataType, ForeignKey, BelongsTo, HasMany } from 'sequelize-typescript';
+import {
+    Table,
+    Column,
+    Model,
+    DataType,
+    ForeignKey,
+    BelongsTo,
+    HasMany,
+} from 'sequelize-typescript';
 import { User } from '../users/user.model';
 import { Blog } from 'src/blogs/blog.model';
 import { Comment } from '../comments/comment.model';
@@ -17,7 +25,7 @@ export class Post extends Model<Post> {
     blogId: number;
 
     @BelongsTo(() => Blog)
-    blog: Blog
+    blog: Blog;
 
     @ForeignKey(() => User)
     @Column

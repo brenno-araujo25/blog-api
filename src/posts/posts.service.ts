@@ -1,9 +1,9 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
-import { InjectModel } from "@nestjs/sequelize";
-import { Post } from "./post.model";
-import { CreatePostDto } from "./dto/create-post.dto";
-import { UpdatePostDto } from "./dto/update-post.dto";
-import { BlogsService } from "src/blogs/blogs.service";
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
+import { Post } from './post.model';
+import { CreatePostDto } from './dto/create-post.dto';
+import { UpdatePostDto } from './dto/update-post.dto';
+import { BlogsService } from 'src/blogs/blogs.service';
 
 @Injectable()
 export class PostsService {
@@ -19,7 +19,9 @@ export class PostsService {
             throw new NotFoundException('Blog not found');
         }
         if (blog.userId !== createPostDto.userId) {
-            throw new NotFoundException('You are not authorized to create a post for this blog');
+            throw new NotFoundException(
+                'You are not authorized to create a post for this blog',
+            );
         }
         const post = new Post();
         post.title = createPostDto.title;
@@ -30,11 +32,15 @@ export class PostsService {
     }
 
     async findAll(): Promise<Post[]> {
-        return this.postModel.findAll({ include: ['blog', 'user', 'comments', 'likes'] });
+        return this.postModel.findAll({
+            include: ['blog', 'user', 'comments', 'likes'],
+        });
     }
 
     async findOne(id: number): Promise<Post> {
-        const post = this.postModel.findByPk(id, { include: ['blog', 'user', 'comments', 'likes'] });
+        const post = this.postModel.findByPk(id, {
+            include: ['blog', 'user', 'comments', 'likes'],
+        });
         if (!post) {
             throw new NotFoundException('Post not found');
         }

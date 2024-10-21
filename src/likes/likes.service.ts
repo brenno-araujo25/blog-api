@@ -11,7 +11,7 @@ export class LikesService {
         @InjectModel(Like)
         private likeModel: typeof Like,
         private postsService: PostsService,
-        private usersService: UsersService
+        private usersService: UsersService,
     ) {}
 
     async toggleLike(createLikeDto: CreateLikeDto): Promise<Like> {
@@ -26,8 +26,8 @@ export class LikesService {
         let like = await this.likeModel.findOne({
             where: {
                 postId: createLikeDto.postId,
-                userId: createLikeDto.userId
-            }
+                userId: createLikeDto.userId,
+            },
         });
         if (like) {
             await like.destroy();

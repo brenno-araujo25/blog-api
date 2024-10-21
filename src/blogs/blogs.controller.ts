@@ -1,4 +1,15 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards, Request, UnauthorizedException } from '@nestjs/common';
+import {
+    Controller,
+    Get,
+    Post,
+    Put,
+    Delete,
+    Body,
+    Param,
+    UseGuards,
+    Request,
+    UnauthorizedException,
+} from '@nestjs/common';
 import { UseInterceptors } from '@nestjs/common';
 import { CacheInterceptor } from '@nestjs/cache-manager';
 import { BlogsService } from './blogs.service';
@@ -13,7 +24,10 @@ export class BlogsController {
 
     @UseGuards(JwtAuthGuard)
     @Post()
-    async create(@Body() createBlogDto: CreateBlogDto, @Request() req): Promise<Blog> {
+    async create(
+        @Body() createBlogDto: CreateBlogDto,
+        @Request() req,
+    ): Promise<Blog> {
         createBlogDto.userId = req.user.id;
         console.log(req.user.id);
         return this.blogsService.create(createBlogDto);
@@ -39,7 +53,9 @@ export class BlogsController {
     ): Promise<Blog> {
         const blog = await this.blogsService.findOne(id);
         if (blog.userId !== req.user.id) {
-            throw new UnauthorizedException('You are not authorized to update this blog');
+            throw new UnauthorizedException(
+                'You are not authorized to update this blog',
+            );
         }
         return this.blogsService.update(id, updateBlogDto);
     }
@@ -49,7 +65,9 @@ export class BlogsController {
     async remove(@Param('id') id: number, @Request() req): Promise<void> {
         const blog = await this.blogsService.findOne(id);
         if (blog.userId !== req.user.id) {
-            throw new UnauthorizedException('You are not authorized to delete this blog');
+            throw new UnauthorizedException(
+                'You are not authorized to delete this blog',
+            );
         }
         return this.blogsService.remove(id);
     }

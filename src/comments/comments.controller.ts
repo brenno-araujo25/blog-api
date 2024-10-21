@@ -1,4 +1,15 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards, Request, UnauthorizedException } from '@nestjs/common';
+import {
+    Controller,
+    Get,
+    Post,
+    Put,
+    Delete,
+    Body,
+    Param,
+    UseGuards,
+    Request,
+    UnauthorizedException,
+} from '@nestjs/common';
 import { CommentsService } from './comments.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
@@ -13,7 +24,7 @@ export class CommentsController {
     @Post()
     async create(
         @Body() createCommentDto: CreateCommentDto,
-        @Request() req
+        @Request() req,
     ): Promise<Comment> {
         createCommentDto.userId = req.user.id;
         return this.commentsService.create(createCommentDto);
@@ -45,10 +56,7 @@ export class CommentsController {
 
     @UseGuards(JwtAuthGuard)
     @Delete(':id')
-    async remove(
-        @Param('id') id: number,
-        @Request() req
-    ): Promise<void> {
+    async remove(@Param('id') id: number, @Request() req): Promise<void> {
         const comment = await this.commentsService.findOne(id);
         if (comment.userId !== req.user.id) {
             throw new UnauthorizedException('You cannot delete this comment');
