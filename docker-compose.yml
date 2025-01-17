@@ -1,23 +1,16 @@
 services:
-  # app:
-  #   build: .
-  #   ports:
-  #     - "3000:3000"
-  #   depends_on:
-  #     - db 
-  #     - redis
-  #   environment:
-  #     - DATABASE_URL=${DATABASE_URL}
-  #     - DATABASE_PORT=${DATABASE_PORT}
-  #     - DATABASE_USER=${DATABASE_USER}
-  #     - DATABASE_PASSWORD=${DATABASE_PASSWORD}
-  #     - DATABASE_NAME=${DATABASE_NAME}
-  #     - REDIS_HOST=${REDIS_HOST}
-  #     - REDIS_PORT=${REDIS_PORT}
-  #     - JWT_SECRET=${JWT_SECRET}
-  #   volumes:
-  #     - .:/app
-  #   command: npm run start:dev
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db 
+      - redis
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    command: npm run start:dev
 
   db:
     image: postgres:13

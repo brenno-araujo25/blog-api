@@ -8,7 +8,7 @@ import {
     HasMany,
 } from 'sequelize-typescript';
 import { User } from '../users/user.model';
-import { Blog } from 'src/blogs/blog.model';
+import { Blog } from '../blogs/blog.model';
 import { Comment } from '../comments/comment.model';
 import { Like } from '../likes/like.model';
 

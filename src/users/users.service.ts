@@ -6,9 +6,6 @@ import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
-    static findOne(followingId: number) {
-        throw new Error('Method not implemented.');
-    }
     constructor(
         @InjectModel(User)
         private userModel: typeof User,

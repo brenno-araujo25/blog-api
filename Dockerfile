@@ -1,37 +1,27 @@
-# # build stage
-# FROM node:21-alpine AS build
+# BUILD STAGE
+FROM node:21.7.1 AS build
 
-# WORKDIR /app
+WORKDIR /usr/src/app
 
-# COPY package*.json ./
+COPY package*.json ./
+RUN npm ci
 
-# RUN npm install
+COPY . .
 
-# COPY . .
+# build the NestJS application
+RUN npm run build
 
-# RUN npm run build
+# RUN STAGE
+FROM node:21.7.1
 
-# # production stage
-# FROM node:21-alpine
+WORKDIR /usr/src/app
 
-# WORKDIR /app
+# Copy only the necessary files from the build stage
+COPY --from=build /usr/src/app/dist ./dist
+COPY --from=build /usr/src/app/node_modules ./node_modules
+COPY --from=build /usr/src/app/package*.json ./
+COPY --from=build /usr/src/app/tsconfig*.json ./
 
-# COPY --from=build /app/dist ./dist
+EXPOSE 3000
 
-# EXPOSE 3000
-
-# CMD [ "node", "dist/main.js" ]
-
-# FROM node:21-alpine
-
-# WORKDIR /app
-
-# COPY package*.json ./
-
-# RUN npm install
-
-# COPY . .
-
-# EXPOSE 3000
-
-# CMD [ "npm", "run", "start:dev" ]
+CMD [ "npm", "run", "start:prod" ]
